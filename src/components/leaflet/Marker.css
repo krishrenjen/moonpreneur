@@ -1,0 +1,24 @@
+.marker-icon {
+  width: 24px;
+  height: 24px;
+  background-color: var(--color-brand-yellow);
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px white;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .marker-icon {
+    transition: transform 0.2s ease;
+  }
+
+  .marker-icon:hover,
+  .marker-icon.active {
+    transform: translateY(-6px) scale(1.15);
+  }
+}
+
+.marker-icon:hover,
+.marker-icon.active {
+  z-index: 1000;
+  cursor: pointer;
+}
