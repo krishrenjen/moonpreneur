@@ -1,8 +1,8 @@
-import { LuPhone } from "react-icons/lu";
 import CircleImage from "./image/CircleImage";
 import BrandButton from "./BrandButton";
 import { FaEnvelope, FaPhoneAlt } from "react-icons/fa";
 import Link from "next/link";
+import Navigation from "./navbar/Navigation";
 
 export default function Header() {
   return (
@@ -43,6 +43,8 @@ export default function Header() {
           <Link href="/" className="h-full py-2 flex items-center justify-center">
             <img src="/assets/svgs/moonpreneur-logo.svg" className="h-16" />
           </Link>
+
+          <Navigation />
 
           <div className="flex items-center justify-center gap-2">
             <BrandButton href="/login" variant="outline" className="w-fit px-2 !py-1" newTab hoverEffect clickEffect>

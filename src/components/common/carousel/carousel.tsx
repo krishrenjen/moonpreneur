@@ -37,7 +37,12 @@ export default function CustomCarousel({ children, className, delay = 3000, ...p
 
   return (
     <div className={clsx("relative w-full", className)}>
-      <Carousel opts={{ loop: true }} plugins={props.autoPlay ? [Autoplay({ delay, stopOnInteraction: props.stopOnInteraction })] : []} setApi={setEmblaApi} className="w-full h-full">
+      <Carousel
+        opts={{ loop: true, duration: 75 }}
+        plugins={props.autoPlay ? [Autoplay({ delay, stopOnInteraction: props.stopOnInteraction, stopOnMouseEnter: true })] : []}
+        setApi={setEmblaApi}
+        className="w-full h-full"
+      >
         <CarouselContent>
           {childArray.map((child, idx) => (
             <CarouselItem key={idx}>{child}</CarouselItem>
@@ -57,7 +62,7 @@ export default function CustomCarousel({ children, className, delay = 3000, ...p
               onClick={() => emblaApi?.scrollTo(idx)}
               className={clsx(
                 "w-3 h-3 rounded-full transition-all duration-300 z-50 border border-black",
-                selectedIndex === idx ? "bg-brand-purple scale-110 shadow-2xl" : "bg-gray-300 cursor-pointer shadow-2xl"
+                selectedIndex === idx ? "bg-brand-purple scale-125 shadow-2xl" : "bg-gray-300 cursor-pointer shadow-2xl"
               )}
               aria-label={`Go to slide ${idx + 1}`}
             />

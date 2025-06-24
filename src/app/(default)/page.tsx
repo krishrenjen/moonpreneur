@@ -34,31 +34,30 @@ export default function Page() {
           }
         `}
       </style>
-      {/* <img src="/assets/home/banner/map.webp" alt="Slide 1" className="w-full max-h-[600px] object-cover overflow-clip" /> */}
 
       <div className="w-full flex items-start justify-center min-h-screen py-2">
-        <div className="w-full my-4 py-4 flex flex-col items-center justify-center gap-4">
+        <div className="w-full py-2 flex flex-col items-center justify-center gap-4">
           {/* Carousel with ProgramSection overlay */}
-          <div className="relative w-full h-[600px]">
+          <div className="flex gap-2 flex-col md:relative w-full h-[600px]">
             {/* Carousel Background */}
-            <CustomCarousel className="w-full h-full" delay={10000} autoPlay={true} dots>
+            <CustomCarousel className="w-full h-full" delay={7500} autoPlay={true} dots>
               <img src="/assets/home/banner/map.webp" alt="Slide 1" className="w-full max-h-[600px] object-cover overflow-clip" />
-              <img src="/assets/home/banner/map2.webp" alt="Slide 2" className="w-full max-h-[600px] object-cover overflow-clip" />
+              <img src="/assets/home/banner/top-banner-girl.webp" alt="Slide 2" className="w-full max-h-[600px] overflow-clip" />
             </CustomCarousel>
 
             {/* Overlayed ProgramSection */}
-            <div className="absolute top-1/2 -translate-y-1/2 right-0 w-full max-w-md px-4">
+            <div className="md:absolute md:top-1/2 md:-translate-y-1/2 md:right-0 w-full max-w-md px-4">
               <div className="bg-white/90 backdrop-blur-md p-2 rounded-xl shadow-xl">
                 <ProgramSection
                   className=""
                   tabs={[
                     <div className="flex flex-col items-center justify-center gap-0">
                       <div className="text-sm font-bold">Robotics</div>
-                      <div className="text-gray-600 text-xs">Free workshop in-person and online</div>
+                      <div className="text-xs">Free workshop in-person and online</div>
                     </div>,
                     <div className="flex flex-col items-center justify-center gap-0">
                       <div className="text-sm font-bold">Math</div>
-                      <div className="text-gray-600 text-xs flex flex-row gap-2 items-center justify-center">
+                      <div className="text-xs flex flex-row gap-2 items-center justify-center">
                         Free trial online{" "}
                         <div
                           style={{
@@ -78,7 +77,7 @@ export default function Page() {
           </div>
 
           {/* Map View */}
-          <div className="w-full max-w-4xl h-[400px]">
+          <div className="w-full max-w-4xl h-fit">
             <MapView locations={locations} />
           </div>
         </div>

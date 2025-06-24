@@ -13,7 +13,10 @@ export default function ProgramSection({ className, tabs }: { className?: string
           <button
             key={idx}
             onClick={() => setActiveIndex(idx)}
-            className={clsx("px-6 py-2 text-sm font-medium w-full rounded-md text-black", idx === activeIndex ? "bg-gray-200 cursor-default" : "cursor-pointer")}
+            className={clsx(
+              "px-6 py-2 text-sm font-medium w-full rounded-md transition-colors duration-300",
+              idx === activeIndex ? "bg-brand-purple-dark cursor-default shadow-md text-white" : "text-black cursor-pointer hover:bg-gray-100"
+            )}
           >
             {tab}
           </button>
