@@ -54,10 +54,6 @@
   }
 } */
 
-body {
-  font-family: var(--font-poppins), Arial, Helvetica, sans-serif;
-}
-
 :root {
   --radius: 0.625rem;
   --background: oklch(1 0 0);

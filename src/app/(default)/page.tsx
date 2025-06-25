@@ -1,9 +1,7 @@
 import BrandButton from "@/components/common/BrandButton";
 import ProgramSection from "@/components/common/forms/ProgramSection";
-import ReserveSeatForm from "@/components/common/forms/ReserveSeatForm";
 import MapView from "@/components/leaflet/MapView";
 import CustomCarousel from "@/components/common/carousel/carousel";
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 
 export default function Page() {
   const locations = [
@@ -16,7 +14,7 @@ export default function Page() {
     },
     { lat: 34.0522, lng: -118.2437, name: "Los Angeles" },
     { lat: 41.8781, lng: -87.6298, name: "Chicago" },
-  ];
+  ]; // TODO: Replace with real data input
 
   return (
     <div>
@@ -36,9 +34,9 @@ export default function Page() {
       </style>
 
       <div className="w-full flex items-start justify-center min-h-screen py-2">
-        <div className="w-full py-2 flex flex-col items-center justify-center gap-4">
+        <div className="w-full py-2 flex flex-col items-center justify-center h-full">
           {/* Carousel with ProgramSection overlay */}
-          <div className="flex gap-2 flex-col md:relative w-full h-[600px]">
+          <div className="flex gap-2 flex-col lg:relative w-full h-full lg:h-[600px] items-center justify-center overflow-hidden">
             {/* Carousel Background */}
             <CustomCarousel className="w-full h-full" delay={7500} autoPlay={true} dots>
               <img src="/assets/home/banner/map.webp" alt="Slide 1" className="w-full max-h-[600px] object-cover overflow-clip" />
@@ -46,10 +44,10 @@ export default function Page() {
             </CustomCarousel>
 
             {/* Overlayed ProgramSection */}
-            <div className="md:absolute md:top-1/2 md:-translate-y-1/2 md:right-0 w-full max-w-md px-4">
+            <div className="relative lg:absolute lg:top-1/2 lg:-translate-y-1/2 lg:right-0 w-full max-w-lg px-4 flex items-center justify-center">
               <div className="bg-white/90 backdrop-blur-md p-2 rounded-xl shadow-xl">
                 <ProgramSection
-                  className=""
+                  className="!max-w-lg"
                   tabs={[
                     <div className="flex flex-col items-center justify-center gap-0">
                       <div className="text-sm font-bold">Robotics</div>
@@ -76,10 +74,18 @@ export default function Page() {
             </div>
           </div>
 
-          {/* Map View */}
-          <div className="w-full max-w-4xl h-fit">
-            <MapView locations={locations} />
+          <div className="w-full bg-brand-purple-dark h-fit py-3 text-white font-base text-center text-lg">
+            <p>
+              Discover the
+              <span className="text-brand-yellow font-medium">&nbsp;next generation of innovators</span>, showcasing their
+              <span className="text-brand-yellow font-medium">&nbsp;creativity and talent&nbsp;</span>
+              with
+              <span className="text-brand-yellow font-bold">&nbsp;MoonCampaigns&nbsp;</span>
+            </p>
           </div>
+
+          {/* Map View */}
+          <div className="w-full max-w-4xl h-fit">{/* <MapView locations={locations} /> */}</div>
         </div>
       </div>
     </div>

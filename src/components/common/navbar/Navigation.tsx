@@ -7,23 +7,26 @@ import { Menu } from "lucide-react";
 import { useState } from "react";
 import { MobileNav } from "./MobileNavigation";
 import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger } from "@/components/ui/navigation-menu";
+import useDimensions from "@/hooks/useDimensions";
 
 type Sublink = {
   label: string;
   description: string;
   img: string;
   href: string;
+  section?: string; // Do not define this; this is automatically generated based on window size
 };
 
 type Tab = {
   label: string;
   sublinks?: Sublink[];
   href?: string;
+  groups?: string[]; // Do not define this; this is automatically generated based on window size
 };
 
-const tabs: Tab[] = [
+const allTabs: Tab[] = [
   {
-    label: "Innovator Program",
+    label: "Innovator Programs",
     sublinks: [
       { label: "Robotics", description: "Age 7-18 Years", img: "", href: "/innovator-program/robotics" },
       { label: "Advanced Math", description: "Grade 2nd-8th", img: "", href: "/innovator-program/advanced-math" },
@@ -44,7 +47,7 @@ const tabs: Tab[] = [
   {
     label: "Student Projects",
     sublinks: [
-      { label: "Product Design", description: "7-10", img: "", href: "/mooncampaigns/?agegroup=1" },
+      { label: "Product Design", description: "7-10", img: "/assets/navbar/product-Design.webp", href: "/mooncampaigns/?agegroup=1" },
       { label: "IOT", description: "11-13", img: "", href: "/mooncampaigns/?agegroup=2" },
       { label: "Passion Project", description: "14-17", img: "", href: "/mooncampaigns/?agegroup=3" },
       { label: "Pre-Incubator Program", description: "18+", img: "", href: "/mooncampaigns/?agegroup=4" },
@@ -55,12 +58,36 @@ const tabs: Tab[] = [
 ];
 
 export default function Navbar() {
+  const { width } = useDimensions();
+  const threshold = 1350;
+
+  const programTabs = allTabs.filter((tab) => tab.label.includes("Program"));
+  const nonProgramTabs = allTabs.filter((tab) => !tab.label.includes("Program"));
+
+  const tabs =
+    width && width < threshold
+      ? [
+          {
+            label: "Programs",
+            groups: Array.from(new Set(programTabs.map((tab) => tab.label))),
+            sublinks: programTabs.flatMap(
+              (tab) =>
+                tab.sublinks?.map((sublink) => ({
+                  ...sublink,
+                  section: tab.label,
+                })) ?? []
+            ),
+          } as Tab,
+          ...nonProgramTabs,
+        ]
+      : allTabs;
+
   return (
     <nav className="flex items-center justify-between">
       {/* Desktop Menu */}
-      <div className="hidden md:flex gap-6 items-center">
+      <div className="hidden lg:flex gap-6 items-center">
         <NavigationMenu>
-          <NavigationMenuList className="flex flex-row items-center space-x-4">
+          <NavigationMenuList className="flex flex-row items-center gap-0 xl:gap-4">
             {tabs.map((tab, index) => (
               <NavigationMenuItem key={index}>
                 {tab.sublinks ? (
@@ -73,13 +100,34 @@ export default function Navbar() {
 
                 {tab.sublinks && (
                   <NavigationMenuContent className="!border-gray-50 !border">
-                    <ul className="grid w-[400px] gap-2 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
-                      {tab.sublinks.map((sublink, index) => (
-                        <ListItem key={index} title={sublink.label} href={sublink.href}>
-                          {sublink.description}
-                        </ListItem>
-                      ))}
-                    </ul>
+                    {tab.groups && tab.groups.length > 0 ? (
+                      <div className="flex flex-col gap-2 mb-4">
+                        {tab.groups.map((group, groupIndex) => (
+                          <div key={groupIndex}>
+                            <h1 className="text-sm font-semibold text-gray-700 mb-2">{group}</h1>
+                            {tab.sublinks && (
+                              <ul className="grid w-[400px] gap-2 md:w-[500px] grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:w-[600px]">
+                                {tab.sublinks
+                                  .filter((sublink) => sublink.section === group)
+                                  .map((sublink, index) => (
+                                    <ListItem key={index} title={sublink.label} href={sublink.href} src={sublink.img}>
+                                      {sublink.description}
+                                    </ListItem>
+                                  ))}
+                              </ul>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      <ul className="grid w-[400px] gap-2 md:w-[500px] grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:w-[600px]">
+                        {tab.sublinks.map((sublink, index) => (
+                          <ListItem key={index} title={sublink.label} href={sublink.href} src={sublink.img}>
+                            {sublink.description}
+                          </ListItem>
+                        ))}
+                      </ul>
+                    )}
                   </NavigationMenuContent>
                 )}
               </NavigationMenuItem>
@@ -89,7 +137,7 @@ export default function Navbar() {
       </div>
 
       {/* Mobile Menu */}
-      <div className="md:hidden">
+      <div className="lg:hidden">
         <Sheet>
           <SheetTrigger asChild>
             <Button variant="ghost" size="icon">
@@ -105,11 +153,12 @@ export default function Navbar() {
   );
 }
 
-function ListItem({ title, children, href, ...props }: React.ComponentPropsWithoutRef<"li"> & { href: string }) {
+function ListItem({ title, children, href, src, ...props }: React.ComponentPropsWithoutRef<"li"> & { href: string; src?: string }) {
   return (
     <li {...props}>
       <NavigationMenuLink asChild>
         <Link href={href}>
+          {src && <img src={src} alt={title} className="w-32 h-32 rounded-md mb-2" />}
           <div className="text-sm leading-none font-medium">{title}</div>
           <p className="text-muted-foreground line-clamp-2 text-sm leading-snug">{children}</p>
         </Link>

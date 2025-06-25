@@ -61,7 +61,7 @@ export default function CustomCarousel({ children, className, delay = 3000, ...p
               key={idx}
               onClick={() => emblaApi?.scrollTo(idx)}
               className={clsx(
-                "w-3 h-3 rounded-full transition-all duration-300 z-50 border border-black",
+                "w-3 h-3 rounded-full transition-all duration-300 z-50 border border-black/30",
                 selectedIndex === idx ? "bg-brand-purple scale-125 shadow-2xl" : "bg-gray-300 cursor-pointer shadow-2xl"
               )}
               aria-label={`Go to slide ${idx + 1}`}

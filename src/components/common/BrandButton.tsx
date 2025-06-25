@@ -18,7 +18,7 @@ function BrandButtonComponent(
   ref: React.Ref<HTMLButtonElement | HTMLAnchorElement>
 ) {
   const baseClasses = clsx(
-    "py-2 px-4 rounded-xl transition-colors flex items-center justify-center",
+    "py-2 px-4 rounded-xl transition-colors flex items-center justify-center box-border ",
     hoverEffect && "motion-safe:hover:translate-y-[-2px] transition-transform duration-200 ease-in-out ",
     clickEffect && "motion-safe:active:scale-75 transition-transform duration-200 ease-in-out",
     variant === "primary" && " bg-brand-yellow text-black border-b-2 border-b-[#fde892]",
@@ -42,24 +42,13 @@ function BrandButtonComponent(
           {children}
         </a>
       ) : (
-        <button
-          ref={ref as React.Ref<HTMLButtonElement>}
-          className={baseClasses}
-          {...props}
-        >
+        <button ref={ref as React.Ref<HTMLButtonElement>} className={baseClasses} {...props}>
           {children}
         </button>
       )}
       {label && (
-      <div
-          className={clsx(
-            "flex items-center gap-1",
-            !labelTakeUpSpace && "absolute top-full pointer-events-none",
-            "text-gray-500 text-sm",
-            labelClassName
-          )}
-        >
-          <img src="/assets/svgs/arrow.svg"/>
+        <div className={clsx("flex items-center gap-1", !labelTakeUpSpace && "absolute top-full pointer-events-none", "text-gray-500 text-sm", labelClassName)}>
+          <img src="/assets/svgs/arrow.svg" />
           <span className="select-none">{label}</span>
         </div>
       )}

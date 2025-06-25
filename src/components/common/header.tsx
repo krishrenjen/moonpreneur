@@ -39,18 +39,32 @@ export default function Header() {
         </div>
       </div>
       <header className="w-full z-50 flex-col items-center justify-center min-h-24">
-        <div className="flex items-center justify-between w-full mx-auto px-8 bg-white h-24">
+        <div className="flex items-center justify-between w-full mx-auto px-4 md:px-8 bg-white h-24">
           <Link href="/" className="h-full py-2 flex items-center justify-center">
-            <img src="/assets/svgs/moonpreneur-logo.svg" className="h-16" />
+            <div className="hidden sm:flex items-center justify-center">
+              <img src="/assets/svgs/moonpreneur-logo.svg" className="h-16" />
+            </div>
+            <div className="sm:hidden flex items-center justify-center">
+              <img src="/assets/svgs/moonpreneur-logo-small.png" className="h-16" />
+            </div>
           </Link>
+
+          <div className="items-center justify-center gap-2 flex lg:hidden">
+            <BrandButton href="/login" variant="outline" className="w-fit px-2 !py-1 text-sm" newTab hoverEffect clickEffect>
+              Login
+            </BrandButton>
+            <BrandButton href="/login" variant="primary" className="w-fit !py-1 text-sm px-8" labelClassName="!text-xs" label="100% free" newTab hoverEffect clickEffect>
+              Trial
+            </BrandButton>
+          </div>
 
           <Navigation />
 
-          <div className="flex items-center justify-center gap-2">
-            <BrandButton href="/login" variant="outline" className="w-fit px-2 !py-1" newTab hoverEffect clickEffect>
+          <div className="items-center justify-center gap-2 hidden lg:flex">
+            <BrandButton href="/login" variant="outline" className="h-full px-2 !py-1" newTab hoverEffect clickEffect>
               Login
             </BrandButton>
-            <BrandButton href="/login" variant="primary" className="w-fit px-2 !py-1" label="100% free" newTab hoverEffect clickEffect>
+            <BrandButton href="/login" variant="primary" className="h-full px-2 !py-1" label="100% free" newTab hoverEffect clickEffect>
               Book a Trial
             </BrandButton>
           </div>
