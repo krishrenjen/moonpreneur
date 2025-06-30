@@ -5,14 +5,19 @@ import Autoplay from "embla-carousel-autoplay";
 import clsx from "clsx";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from "@/components/ui/carousel";
 
-type EmblaAutoCarouselProps = {
+export type EmblaAutoCarouselProps = {
   children?: React.ReactNode;
   className?: string;
+  carouselClassName?: string;
+  carouselContentClassName?: string;
   delay?: number;
   autoPlay?: boolean;
   arrows?: boolean;
   dots?: boolean;
   stopOnInteraction?: boolean;
+  numberOfItemsPerSlide?: number;
+  align?: "start" | "center" | "end";
+  slideDuration?: number;
 };
 
 export default function CustomCarousel({ children, className, delay = 3000, ...props }: EmblaAutoCarouselProps) {
@@ -36,16 +41,18 @@ export default function CustomCarousel({ children, className, delay = 3000, ...p
   }, [emblaApi]);
 
   return (
-    <div className={clsx("relative w-full", className)}>
+    <div className={clsx("relative w-fit", className)}>
       <Carousel
-        opts={{ loop: true, duration: 75 }}
+        opts={{ loop: true, duration: props.slideDuration ?? 75, align: props.align || "start", containScroll: "trimSnaps" }}
         plugins={props.autoPlay ? [Autoplay({ delay, stopOnInteraction: props.stopOnInteraction, stopOnMouseEnter: true })] : []}
         setApi={setEmblaApi}
-        className="w-full h-full"
+        className={clsx("w-fit h-full", props.carouselClassName)}
       >
-        <CarouselContent>
+        <CarouselContent className={clsx("w-fit h-full", props.carouselContentClassName)}>
           {childArray.map((child, idx) => (
-            <CarouselItem key={idx}>{child}</CarouselItem>
+            <CarouselItem className="flex items-center justify-center" key={idx} style={{ flexBasis: `calc(100% / ${props.numberOfItemsPerSlide || 1})` }}>
+              {child}
+            </CarouselItem>
           ))}
         </CarouselContent>
 
@@ -56,7 +63,7 @@ export default function CustomCarousel({ children, className, delay = 3000, ...p
       {/* Pagination Dots */}
       {props.dots && (
         <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-2 z-10">
-          {scrollSnaps.map((_, idx) => (
+          {Array.from({ length: Math.ceil(childArray.length / (props.numberOfItemsPerSlide || 1)) }).map((_, idx) => (
             <button
               key={idx}
               onClick={() => emblaApi?.scrollTo(idx)}

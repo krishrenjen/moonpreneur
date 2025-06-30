@@ -21,7 +21,7 @@ function BrandButtonComponent(
     "py-2 px-4 rounded-xl transition-colors flex items-center justify-center box-border ",
     hoverEffect && "motion-safe:hover:translate-y-[-2px] transition-transform duration-200 ease-in-out ",
     clickEffect && "motion-safe:active:scale-75 transition-transform duration-200 ease-in-out",
-    variant === "primary" && " bg-brand-yellow text-black border-b-2 border-b-[#fde892]",
+    variant === "primary" && " bg-brand-yellow text-black border-b-2 border-b-[#fde892] hover:bg-brand-yellow/90",
     variant === "outline" && "bg-transparent border-black border-2 text-black",
     variant === "secondary" && "bg-brand-blue text-white border-b-2 border-b-[#b1b6f1]",
     className

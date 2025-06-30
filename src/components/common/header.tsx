@@ -1,4 +1,4 @@
-import CircleImage from "./image/CircleImage";
+import CircleImage from "./media/CircleImage";
 import BrandButton from "./BrandButton";
 import { FaEnvelope, FaPhoneAlt } from "react-icons/fa";
 import Link from "next/link";
@@ -6,7 +6,7 @@ import Navigation from "./navbar/Navigation";
 
 export default function Header() {
   return (
-    <div className="sticky z-50 w-full">
+    <div className="top-0 sticky z-50 w-full">
       <div className="bg-brand-blue text-white text-center py-2 min-h-20 flex items-center justify-between gap-2 px-2">
         <div className="flex flex-row items-center justify-start gap-1 md:gap-2 w-fit">
           <div className="flex-row gap-1 justify-center items-center my-2 hidden lg:flex">
@@ -27,13 +27,13 @@ export default function Header() {
         </div>
 
         <div className="flex-col xl:flex-row items-center justify-center gap-x-4 gap-y-2 hidden md:flex">
-          <div className="flex flex-row items-center justify-center gap-2">
-            <FaEnvelope />
+          <div className="flex flex-row items-center justify-center gap-2 group">
+            <FaEnvelope className="group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300" />
             <a href="mailto:inquiry@moonpreneur.com">inquiry@moonpreneur.com</a>
           </div>
 
-          <div className="flex flex-row items-center justify-center gap-2 whitespace-nowrap">
-            <FaPhoneAlt />
+          <div className="flex flex-row items-center justify-center gap-2 whitespace-nowrap group">
+            <FaPhoneAlt className="group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300" />
             <a href="tel:+18555500571">+1 (855) 550-0571</a>
           </div>
         </div>
@@ -49,24 +49,26 @@ export default function Header() {
             </div>
           </Link>
 
-          <div className="items-center justify-center gap-2 flex lg:hidden">
-            <BrandButton href="/login" variant="outline" className="w-fit px-2 !py-1 text-sm" newTab hoverEffect clickEffect>
-              Login
-            </BrandButton>
-            <BrandButton href="/login" variant="primary" className="w-fit !py-1 text-sm px-8" labelClassName="!text-xs" label="100% free" newTab hoverEffect clickEffect>
-              Trial
-            </BrandButton>
-          </div>
+          <div className="flex items-center justify-center gap-4">
+            <div className="items-center justify-center gap-2 flex lg:hidden">
+              <BrandButton href="/login" variant="outline" className="w-fit px-2 !py-1 text-sm md:text-base" newTab hoverEffect clickEffect>
+                Login
+              </BrandButton>
+              <BrandButton href="/login" variant="primary" className="w-fit !py-1 text-sm md:text-base px-8" labelClassName="!text-xs" label="100% free" newTab hoverEffect clickEffect>
+                Trial
+              </BrandButton>
+            </div>
 
-          <Navigation />
+            <Navigation />
 
-          <div className="items-center justify-center gap-2 hidden lg:flex">
-            <BrandButton href="/login" variant="outline" className="h-full px-2 !py-1" newTab hoverEffect clickEffect>
-              Login
-            </BrandButton>
-            <BrandButton href="/login" variant="primary" className="h-full px-2 !py-1" label="100% free" newTab hoverEffect clickEffect>
-              Book a Trial
-            </BrandButton>
+            <div className="items-center justify-center gap-2 hidden lg:flex">
+              <BrandButton href="/login" variant="outline" className="h-full px-2 !py-1" newTab hoverEffect clickEffect>
+                Login
+              </BrandButton>
+              <BrandButton href="/login" variant="primary" className="h-full px-2 !py-1" label="100% free" newTab hoverEffect clickEffect>
+                Book a Trial
+              </BrandButton>
+            </div>
           </div>
         </div>
       </header>

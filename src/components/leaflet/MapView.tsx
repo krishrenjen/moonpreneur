@@ -1,14 +1,15 @@
 "use client";
 
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { useState } from "react";
 import "./Marker.css";
 import { LuCalendar, LuMapPin } from "react-icons/lu";
 import { Hyperlink } from "@/common/types/Hyperlink";
+import useDimensions from "@/hooks/useDimensions";
 
-interface Location {
+export interface Location {
   lat: number;
   lng: number;
   name: string;
@@ -25,19 +26,15 @@ const MapView = ({ locations }: Props) => {
 
   const center: [number, number] = [39.8283, -98.5795];
 
+  const { width } = useDimensions();
+
+  const zoomLevel = width > 768 ? 4 : 3; // Adjust zoom level based on screen width
+
+  if (width === 0) return null;
+
   return (
-    <MapContainer
-      center={center}
-      zoom={5}
-      minZoom={2}
-      style={{ height: "500px", width: "100%"}}
-      className="!z-0"
-      scrollWheelZoom={true}
-    >
-      <TileLayer
-        attribution="&copy; OpenStreetMap contributors"
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-      />
+    <MapContainer center={center} zoom={zoomLevel} minZoom={2} style={{ height: "500px", width: "100%" }} className="!z-0" scrollWheelZoom={true}>
+      <TileLayer attribution="&copy; OpenStreetMap contributors" url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
       {locations.map((loc, idx) => (
         <Marker
           key={idx}
@@ -55,17 +52,12 @@ const MapView = ({ locations }: Props) => {
           <Popup>
             <div className="flex flex-col items-center gap-2">
               <div className="flex items-center gap-1 ">
-                <LuMapPin className="!m-0 p-0"/>
-                <a
-                  href={`https://www.google.com/maps/search/?api=1&query=${loc.lat},${loc.lng}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-center align-middle"
-                >
+                <LuMapPin className="!m-0 p-0" />
+                <a href={`https://www.google.com/maps/search/?api=1&query=${loc.lat},${loc.lng}`} target="_blank" rel="noopener noreferrer" className="text-center align-middle">
                   {loc.name}
                 </a>
               </div>
-              
+
               {loc.date && (
                 <div className="flex items-center gap-1 justify-center">
                   <LuCalendar className="text-sm" />
@@ -74,10 +66,10 @@ const MapView = ({ locations }: Props) => {
               )}
 
               {loc.link && (
-                <a href={loc.link.href} className="w-fit px-2 py-1 rounded-md bg-red-400 !text-white">{loc.link.label ?? "More Info"}</a>
+                <a href={loc.link.href} className="w-fit px-2 py-1 rounded-md bg-red-400 !text-white">
+                  {loc.link.label ?? "More Info"}
+                </a>
               )}
-              
-              
             </div>
           </Popup>
         </Marker>

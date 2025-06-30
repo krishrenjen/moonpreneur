@@ -11,7 +11,7 @@ import useDimensions from "@/hooks/useDimensions";
 
 type Sublink = {
   label: string;
-  description: string;
+  description?: string;
   img: string;
   href: string;
   section?: string; // Do not define this; this is automatically generated based on window size
@@ -28,29 +28,29 @@ const allTabs: Tab[] = [
   {
     label: "Innovator Programs",
     sublinks: [
-      { label: "Robotics", description: "Age 7-18 Years", img: "", href: "/innovator-program/robotics" },
-      { label: "Advanced Math", description: "Grade 2nd-8th", img: "", href: "/innovator-program/advanced-math" },
-      { label: "Game Development", description: "Age 7-18 Years", img: "", href: "/innovator-program/game-development" },
-      { label: "App Development", description: "Age 7-18 Years", img: "", href: "/innovator-program/app-development" },
-      { label: "Power Skills Program", description: "Age 7-18 Years", img: "", href: "/innovator-program/power-skills" },
+      { label: "Robotics", description: "Age 7-18 Years", img: "/assets/navbar/innovator_program/robotics.webp", href: "/innovator-program/robotics" },
+      { label: "Advanced Math", description: "Grade 2nd-8th", img: "/assets/navbar/innovator_program/math.webp", href: "/innovator-program/advanced-math" },
+      { label: "Game Development", description: "Age 7-18 Years", img: "/assets/navbar/innovator_program/game_dev.webp", href: "/innovator-program/game-development" },
+      { label: "App Development", description: "Age 7-18 Years", img: "/assets/navbar/innovator_program/app_dev.webp", href: "/innovator-program/app-development" },
+      { label: "Power Skills Program", description: "Age 7-18 Years", img: "/assets/navbar/innovator_program/power_skills.webp", href: "/innovator-program/power-skills" },
     ],
   },
   {
     label: "Advanced Programs",
     sublinks: [
-      { label: "Product Design", description: "Age 10-17 Years", img: "", href: "/programs/product-design" },
-      { label: "IOT", description: "Age 10-17 Years", img: "", href: "/programs/iot" },
-      { label: "Passion Project", description: "Age 15-18 Years", img: "", href: "/programs/passion-project" },
-      { label: "Pre-Incubator Program", description: "Age 14-23 Years", img: "", href: "/programs/pre-incubator" },
+      { label: "Product Design", description: "Age 10-17 Years", img: "/assets/navbar/advanced_program/product_design.webp", href: "/programs/product-design" },
+      { label: "IOT", description: "Age 10-17 Years", img: "/assets/navbar/advanced_program/IOT.webp", href: "/programs/iot" },
+      { label: "Passion Project", description: "Age 15-18 Years", img: "/assets/navbar/advanced_program/passion_project.webp", href: "/programs/passion-project" },
+      { label: "Pre-Incubator Program", description: "Age 14-23 Years", img: "/assets/navbar/advanced_program/pre_incubator.webp", href: "/programs/pre-incubator" },
     ],
   },
   {
     label: "Student Projects",
     sublinks: [
-      { label: "Product Design", description: "7-10", img: "/assets/navbar/product-Design.webp", href: "/mooncampaigns/?agegroup=1" },
-      { label: "IOT", description: "11-13", img: "", href: "/mooncampaigns/?agegroup=2" },
-      { label: "Passion Project", description: "14-17", img: "", href: "/mooncampaigns/?agegroup=3" },
-      { label: "Pre-Incubator Program", description: "18+", img: "", href: "/mooncampaigns/?agegroup=4" },
+      { label: "Age Group 7-10 Years", img: "/assets/navbar/age_groups/Age-Group-7-10-Year.webp", href: "/mooncampaigns/?agegroup=1" },
+      { label: "Age Group 11-13 Years", img: "/assets/navbar/age_groups/Age-Group-11-13-Year.webp", href: "/mooncampaigns/?agegroup=2" },
+      { label: "Age Group 14-17 Years", img: "/assets/navbar/age_groups/Age-Group-14-17-Year.webp", href: "/mooncampaigns/?agegroup=3" },
+      { label: "Age Group 18+ Years", img: "/assets/navbar/age_groups/Age-Group-18-Year.webp", href: "/mooncampaigns/?agegroup=4" },
     ],
   },
   { label: "Summer Camp", href: "/summer-camp" },

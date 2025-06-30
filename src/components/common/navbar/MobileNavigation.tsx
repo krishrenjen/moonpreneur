@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { ChevronDown, ChevronUp } from "lucide-react";
+import clsx from "clsx";
 
 type LinkItem = {
   label: string;
@@ -16,13 +17,13 @@ export function MobileNav({ links }: { links: LinkItem[] }) {
   };
 
   return (
-    <div className="mt-6 flex flex-col gap-4">
+    <div className="px-2 mt-12 flex flex-col gap-4">
       {links.map((link) =>
         link.sublinks ? (
           <div key={link.label}>
             <button onClick={() => toggle(link.label)} className="flex items-center justify-between w-full text-left font-medium">
               <span>{link.label}</span>
-              {openSections[link.label] ? <ChevronUp /> : <ChevronDown />}
+              <ChevronUp className={clsx("transition-transform duration-300 ", { "rotate-180": openSections[link.label] })} />
             </button>
             {openSections[link.label] && (
               <div className="ml-4 mt-2 flex flex-col gap-2">
