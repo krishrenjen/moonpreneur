@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Link from "next/link";
-import { ChevronDown, ChevronUp } from "lucide-react";
+import { ChevronUp } from "lucide-react";
 import clsx from "clsx";
 
 type LinkItem = {

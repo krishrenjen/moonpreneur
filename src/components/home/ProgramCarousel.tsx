@@ -1,10 +1,13 @@
 "use client";
 import useDimensions from "@/hooks/useDimensions";
-import CustomCarousel from "../common/carousel/carousel";
 import ProgramCard, { Program } from "./ProgramCard";
 import DimensionalCarousel from "../common/carousel/dimensionalCarousel";
 
-export default function ProgramCarousel({ programs }: { programs?: Program[] }) {
+export default function ProgramCarousel({
+  programs,
+}: {
+  programs?: Program[];
+}) {
   const { width } = useDimensions();
 
   return (
