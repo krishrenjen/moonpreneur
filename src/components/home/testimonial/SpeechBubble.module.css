@@ -1,0 +1,37 @@
+.bubble {
+  position: relative;
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 1rem 1.5rem;
+  max-width: 300px;
+  font-size: 1rem;
+  color: #000000;
+  margin: 2rem;
+  border: 2px solid #00000028;
+}
+
+/* Outer triangle for border */
+.bubble::before {
+  content: "";
+  position: absolute;
+  bottom: -12px;
+  left: 12;
+  width: 0;
+  height: 0;
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-top: 12px solid #00000028;
+}
+
+/* Inner triangle to match bubble color */
+.bubble::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 14px;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid #ffffff;
+}

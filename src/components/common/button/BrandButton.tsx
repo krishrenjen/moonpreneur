@@ -2,7 +2,8 @@
 import React from "react";
 import clsx from "clsx";
 
-export interface BrandButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface BrandButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "primary" | "secondary" | "outline";
   href?: string;
   newTab?: boolean;
@@ -14,16 +15,32 @@ export interface BrandButtonProps extends React.ButtonHTMLAttributes<HTMLButtonE
 }
 
 function BrandButtonComponent(
-  { children, className, labelClassName, variant = "primary", href, label, newTab, hoverEffect = false, clickEffect = false, labelTakeUpSpace = false, ...props }: BrandButtonProps,
+  {
+    children,
+    className,
+    labelClassName,
+    variant = "primary",
+    href,
+    label,
+    newTab,
+    hoverEffect = false,
+    clickEffect = false,
+    labelTakeUpSpace = false,
+    ...props
+  }: BrandButtonProps,
   ref: React.Ref<HTMLButtonElement | HTMLAnchorElement>
 ) {
   const baseClasses = clsx(
     "py-2 px-4 rounded-xl transition-colors flex items-center justify-center box-border ",
-    hoverEffect && "motion-safe:hover:translate-y-[-2px] transition-transform duration-200 ease-in-out ",
-    clickEffect && "motion-safe:active:scale-75 transition-transform duration-200 ease-in-out",
-    variant === "primary" && " bg-brand-yellow text-black border-b-2 border-b-[#fde892] hover:bg-brand-yellow/90",
+    hoverEffect &&
+      "motion-safe:hover:translate-y-[-2px] transition-transform duration-200 ease-in-out ",
+    clickEffect &&
+      "motion-safe:active:scale-75 transition-transform duration-200 ease-in-out",
+    variant === "primary" &&
+      " bg-brand-yellow text-black border-b-2 border-b-[#fde892] hover:bg-brand-yellow/90",
     variant === "outline" && "bg-transparent border-black border-2 text-black",
-    variant === "secondary" && "bg-brand-blue text-white border-b-2 border-b-[#b1b6f1]",
+    variant === "secondary" &&
+      "bg-brand-blue text-white border-b-2 border-b-[#b1b6f1]",
     className
   );
 
@@ -42,12 +59,23 @@ function BrandButtonComponent(
           {children}
         </a>
       ) : (
-        <button ref={ref as React.Ref<HTMLButtonElement>} className={baseClasses} {...props}>
+        <button
+          ref={ref as React.Ref<HTMLButtonElement>}
+          className={baseClasses}
+          {...props}
+        >
           {children}
         </button>
       )}
       {label && (
-        <div className={clsx("flex items-center gap-1", !labelTakeUpSpace && "absolute top-full pointer-events-none", "text-gray-500 text-sm", labelClassName)}>
+        <div
+          className={clsx(
+            "flex items-center gap-1",
+            !labelTakeUpSpace && "absolute top-full pointer-events-none",
+            "text-gray-500 text-sm",
+            labelClassName
+          )}
+        >
           <img src="/assets/svgs/arrow.svg" />
           <span className="select-none">{label}</span>
         </div>

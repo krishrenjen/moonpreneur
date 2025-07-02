@@ -1,4 +1,4 @@
-import BrandButton from "../common/BrandButton";
+import BrandButton from "../common/button/BrandButton";
 
 export type Program = {
   name: string;
@@ -14,7 +14,13 @@ export default function ProgramCard({ program }: { program: Program }) {
       <p className="text-gray-700 mb-4">{program.description}</p>
       {program.link && (
         <>
-          {program.img && <img src={program.img} alt={program.name} className="w-full h-40 object-cover rounded mb-4" />}
+          {program.img && (
+            <img
+              src={program.img}
+              alt={program.name}
+              className="w-full h-40 object-cover rounded mb-4"
+            />
+          )}
           <BrandButton variant="secondary" href={program.link.href}>
             {program.link.label}
           </BrandButton>

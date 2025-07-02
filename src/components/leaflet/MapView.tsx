@@ -33,8 +33,17 @@ const MapView = ({ locations }: Props) => {
   if (width === 0) return null;
 
   return (
-    <MapContainer center={center} zoom={zoomLevel} minZoom={2} style={{ height: "500px", width: "100%" }} className="!z-0" scrollWheelZoom={true}>
-      <TileLayer attribution="&copy; OpenStreetMap contributors" url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+    <MapContainer
+      center={center}
+      zoom={zoomLevel}
+      minZoom={2}
+      className="!z-0 h-[500px] w-[100%]"
+      scrollWheelZoom={true}
+    >
+      <TileLayer
+        attribution="&copy; OpenStreetMap contributors"
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+      />
       {locations.map((loc, idx) => (
         <Marker
           key={idx}
@@ -45,7 +54,9 @@ const MapView = ({ locations }: Props) => {
           }}
           icon={L.divIcon({
             className: `custom-marker`,
-            html: `<div class="marker-icon ${activeIdx === idx ? "active" : ""}"></div>`,
+            html: `<div class="marker-icon ${
+              activeIdx === idx ? "active" : ""
+            }"></div>`,
             iconSize: [30, 30],
           })}
         >
@@ -53,7 +64,12 @@ const MapView = ({ locations }: Props) => {
             <div className="flex flex-col items-center gap-2">
               <div className="flex items-center gap-1 ">
                 <LuMapPin className="!m-0 p-0" />
-                <a href={`https://www.google.com/maps/search/?api=1&query=${loc.lat},${loc.lng}`} target="_blank" rel="noopener noreferrer" className="text-center align-middle">
+                <a
+                  href={`https://www.google.com/maps/search/?api=1&query=${loc.lat},${loc.lng}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-center align-middle"
+                >
                   {loc.name}
                 </a>
               </div>
@@ -61,12 +77,17 @@ const MapView = ({ locations }: Props) => {
               {loc.date && (
                 <div className="flex items-center gap-1 justify-center">
                   <LuCalendar className="text-sm" />
-                  <p className="!m-0 p-0 leading-none text-center align-middle">{loc.date}</p>
+                  <p className="!m-0 p-0 leading-none text-center align-middle">
+                    {loc.date}
+                  </p>
                 </div>
               )}
 
               {loc.link && (
-                <a href={loc.link.href} className="w-fit px-2 py-1 rounded-md bg-red-400 !text-white">
+                <a
+                  href={loc.link.href}
+                  className="w-fit px-2 py-1 rounded-md bg-red-400 !text-white"
+                >
                   {loc.link.label ?? "More Info"}
                 </a>
               )}
